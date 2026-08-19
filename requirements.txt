@@ -1,0 +1,23 @@
+# Core
+python-dotenv>=1.0
+requests>=2.31
+
+# LLM APIs
+groq>=0.9
+google-generativeai>=0.7
+
+# Voice/TTS
+elevenlabs>=1.0
+
+# Telegram
+python-telegram-bot>=21.0
+
+# Data & Processing
+numpy>=1.24
+Pillow>=10.0
+
+# Video (Phase 3+)
+moviepy>=1.0
+
+# Testing
+pytest>=7.0
