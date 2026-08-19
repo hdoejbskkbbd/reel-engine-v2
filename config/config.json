@@ -1,0 +1,57 @@
+{
+  "project_name": "reel_engine_v2",
+  "environment": "development",
+
+  "paths": {
+    "data_dir": "data",
+    "raw_dir": "data/raw",
+    "processed_dir": "data/processed",
+    "trends_dir": "data/trends",
+    "ideas_dir": "data/ideas",
+    "scripts_dir": "data/scripts",
+    "performance_dir": "data/performance",
+    "database_dir": "data/database",
+    "database_file": "data/database/reel_engine.db",
+    "drafts_dir": "output/drafts",
+    "final_dir": "output/final",
+    "logs_dir": "output/logs"
+  },
+
+  "logging": {
+    "level": "INFO",
+    "log_file": "output/logs/reel_engine.log",
+    "console": true
+  },
+
+  "categories": [
+    "business",
+    "mindset",
+    "productivity",
+    "self improvement",
+    "psychology",
+    "entrepreneurship"
+  ],
+
+  "content_types": [
+    "trend",
+    "evergreen",
+    "experimental",
+    "repeatable_series"
+  ],
+
+  "video_defaults": {
+    "aspect_ratio": "9:16",
+    "resolution": [1080, 1920],
+    "fps": 30,
+    "max_duration_seconds": 90
+  },
+
+  "scoring_weights": {
+    "trend_strength": 1.0,
+    "historical_performance": 1.0,
+    "niche_relevance": 1.0,
+    "novelty": 1.0,
+    "repeatability": 1.0,
+    "saturation_penalty": 1.0
+  }
+}
