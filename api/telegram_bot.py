@@ -52,18 +52,18 @@ class TelegramAdminBot:
         try:
             settings = get_settings()
             tables = list_tables(settings)
-            msg = f"Reel Engine V2 Status:
+            msg = "Reel Engine V2 Status:" + "
 "
-            msg += f"Project: {settings.project_name}
+            msg += "Project: " + settings.project_name + "
 "
-            msg += f"Env: {settings.environment}
+            msg += "Env: " + settings.environment + "
 "
-            msg += f"Tables: {len(tables)} ready
+            msg += "Tables: " + str(len(tables)) + " ready" + "
 "
-            msg += f"Categories: {', '.join(settings.categories[:3])}..."
+            msg += "Categories: " + ", ".join(settings.categories[:3]) + "..."
             await update.message.reply_text(msg)
         except Exception as e:
-            await update.message.reply_text(f"Error: {e}")
+            await update.message.reply_text("Error: " + str(e))
 
     async def _cmd_ideas(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id != self.admin_id:
@@ -71,25 +71,25 @@ class TelegramAdminBot:
             return
         args = context.args
         topic = " ".join(args) if args else "business growth"
-        await update.message.reply_text(f"Generating ideas for: {topic}...")
+        await update.message.reply_text("Generating ideas for: " + topic + "...")
         try:
             from api.groq_client import GroqClient
             client = GroqClient()
             ideas = client.generate_ideas(topic, "business", count=3)
-            msg = "Generated Ideas:
+            msg = "Generated Ideas:" + "
 
 "
             for i, idea in enumerate(ideas, 1):
-                msg += f"{i}. {idea.get('hook', 'N/A')}
+                msg += str(i) + ". " + idea.get("hook", "N/A") + "
 "
-                msg += f"   Type: {idea.get('content_type', 'N/A')}
+                msg += "   Type: " + idea.get("content_type", "N/A") + "
 "
-                msg += f"   Duration: {idea.get('estimated_duration', 'N/A')}s
+                msg += "   Duration: " + str(idea.get("estimated_duration", "N/A")) + "s" + "
 
 "
             await update.message.reply_text(msg[:4000])
         except Exception as e:
-            await update.message.reply_text(f"Error: {e}")
+            await update.message.reply_text("Error: " + str(e))
 
     async def _cmd_generate(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id != self.admin_id:
@@ -97,24 +97,25 @@ class TelegramAdminBot:
             return
         args = context.args
         hook = " ".join(args) if args else "3 habits that made me $1M"
-        await update.message.reply_text(f"Generating script for: {hook}...")
+        await update.message.reply_text("Generating script for: " + hook + "...")
         try:
             from api.groq_client import GroqClient
             client = GroqClient()
             script = client.generate_script(hook, "Business mindset video", 60)
-            msg = f"Script Generated:
+            msg = "Script Generated:" + "
 
 "
-            msg += f"Hook: {script.get('hook_line', 'N/A')}
+            msg += "Hook: " + script.get("hook_line", "N/A") + "
 
 "
-            msg += f"Body: {script.get('script_body', 'N/A')[:500]}...
+            body = script.get("script_body", "N/A")
+            msg += "Body: " + (body[:500] + "..." if len(body) > 500 else body) + "
 
 "
-            msg += f"CTA: {script.get('cta_line', 'N/A')}"
+            msg += "CTA: " + script.get("cta_line", "N/A")
             await update.message.reply_text(msg[:4000])
         except Exception as e:
-            await update.message.reply_text(f"Error: {e}")
+            await update.message.reply_text("Error: " + str(e))
 
     async def _cmd_voice(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id != self.admin_id:
@@ -127,12 +128,12 @@ class TelegramAdminBot:
             from api.elevenlabs_client import ElevenLabsClient
             client = ElevenLabsClient()
             import uuid
-            out_path = f"output/final/voice_{uuid.uuid4().hex[:8]}.mp3"
+            out_path = "output/final/voice_" + uuid.uuid4().hex[:8] + ".mp3"
             os.makedirs("output/final", exist_ok=True)
             client.save_voiceover(text, out_path)
             await update.message.reply_audio(audio=open(out_path, "rb"), caption="Voiceover ready")
         except Exception as e:
-            await update.message.reply_text(f"Error: {e}")
+            await update.message.reply_text("Error: " + str(e))
 
     async def _cmd_help(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id != self.admin_id:
